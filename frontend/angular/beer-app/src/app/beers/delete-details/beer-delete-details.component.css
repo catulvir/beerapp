@@ -1,0 +1,21 @@
+#editButton {
+    float: left;
+}
+
+#deleteButton {
+    float: right;
+}
+
+#img-col {
+    border-right: 1px solid rgba(0,0,0,.125);
+}
+
+.accordion-button:not(.collapsed) {
+    background-color: rgba(0,0,0,.03);
+}
+
+#flavoursList {
+    display: flex;
+    justify-content: start;
+    flex-wrap: wrap;
+}

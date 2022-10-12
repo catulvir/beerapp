@@ -1,0 +1,11 @@
+.card {
+  height: 100%
+}
+
+#editButton {
+  float: left;
+}
+
+#deleteButton {
+  float: right;
+}

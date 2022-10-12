@@ -1,14 +1,43 @@
 package catulvir.beerapp.backend.controller;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import java.util.List;
+import javax.validation.Valid;
+import org.springframework.web.bind.annotation.*;
+import catulvir.beerapp.backend.model.Beer;
+import catulvir.beerapp.backend.repository.BeerRepository;
 
 @RestController
 public class BeerController {
 
-	@GetMapping("/beer")
-	public String beer(@RequestParam(value = "name") String name) {
-		return name;
-	}
+	private BeerRepository beerRepository;
+
+    public BeerController(BeerRepository beerRepository) {
+        this.beerRepository = beerRepository;
+    }
+
+    @GetMapping("beers")
+    @ResponseBody
+    public List<Beer> getBeers(@RequestParam(required = false) String name) {
+        return beerRepository.findBeers(name);
+    }
+
+    @GetMapping("beers/{id}")
+    public Beer getBeer(@PathVariable Long id) {
+        return beerRepository.findBeer(id);
+    }
+
+	@PostMapping("beers")
+    public Beer createBeer(@RequestBody @Valid Beer beer) {
+        return beerRepository.saveBeer(beer);
+    }
+
+    @PutMapping("beers")
+    public void editBeer(@RequestBody @Valid Beer beer) {
+        beerRepository.updateBeer(beer);
+    }
+
+    @DeleteMapping("beers/{id}")
+    public void deleteBeer(@PathVariable Long id) {
+        beerRepository.deleteBeer(id);
+    }
 }

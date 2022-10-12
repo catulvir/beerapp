@@ -1,0 +1,144 @@
+<div class="container-xxl">
+
+  <div *ngIf="loading" class="alert alert-warning text-center">
+    <div class="spinner-border text-warning" role="status"></div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+  <div class="card mb-3 mt-3">
+    <div class="row g-0">
+      <div class="col-md-4" id="img-col">
+        <img [src]="beer?.imageLink" class="card-img-top" alt="beer image">
+      </div>
+      <div class="col-md-8">
+        <div class="card-body">
+          <h5 class="card-title">{{beer?.name}}</h5>
+          <h6 class="card-subtitle mb-2 text-muted">
+            <span class="me-1">{{beer?.manufacturer?.name}},</span>
+            <span class="me-1">{{beer?.beerType?.name}},</span>
+            <span class="me-1">{{beer?.originCountry?.name}}</span>
+          </h6>
+        </div>
+        <div class="card-header">
+          Properties
+        </div>
+        <ul class="list-group list-group-flush">
+          <li class="list-group-item">(Admin) rating: {{beer?.averageRating}}/10 ⭐</li>
+          <li class="list-group-item">ABV: {{beer?.abv}}%</li>
+          <li *ngIf="beer?.bitterness !== 0" class="list-group-item">Bitterness: {{beer?.bitterness}} IBU</li>
+          <li *ngIf="beer?.colour !== 0" class="list-group-item">Colour: {{beer?.colour}} EBC</li>
+          <li *ngIf="beer?.wortDensity !== 0" class="list-group-item">Wort density: {{beer?.wortDensity}} % P</li>
+          <li *ngIf="beer?.lowerServeTemperature !== 0" class="list-group-item">Best served at {{beer?.lowerServeTemperature}}°C -
+            {{beer?.higherServeTemperature}}°C</li>
+          <li class="list-group-item" id="flavoursList">
+            <div *ngIf="beer?.isCraft">
+              <h5><span class="badge rounded-pill bg-success text-dark me-1">craft</span></h5>
+            </div>
+            <div *ngFor="let flavour of beer?.flavours">
+              <h5><span class="badge rounded-pill bg-warning text-dark me-1">{{flavour.name}}</span></h5>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <div class="accordion">
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#description"
+          aria-expanded="true" aria-controls="description">
+          <h5>Description</h5>
+        </button>
+      </h2>
+      <div id="description" class="accordion-collapse collapse show" aria-labelledby="beer-description">
+        <div class="accordion-body">
+          <span *ngIf="beer?.description">{{beer?.description}}</span>
+          <span *ngIf="!beer?.description">No description provided.</span>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#type"
+          aria-expanded="false" aria-controls="type">
+          <h5>Type: {{beer?.beerType?.name}}</h5>
+        </button>
+      </h2>
+      <div id="type" class="accordion-collapse collapse" aria-labelledby="beer-type">
+        <div class="accordion-body">
+          <span *ngIf="beer?.beerType?.description">{{beer?.beerType?.description}}</span>
+          <span *ngIf="!beer?.beerType?.description">No description provided.</span>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse"
+          data-bs-target="#manufacturer" aria-expanded="false" aria-controls="manufacturer">
+          <h5>Manufacturer: {{beer?.manufacturer?.name}}</h5>
+        </button>
+      </h2>
+      <div id="manufacturer" class="accordion-collapse collapse" aria-labelledby="beer-manufacturer">
+        <div class="accordion-body">
+          <div class="card border-light mb-3 mt-3" style="max-width: 900px; border: none">
+            <div class="row g-0">
+              <div class="col-md-4">
+                <img [src]="beer?.manufacturer?.imageLink" class="card-img-top" alt="manufacturer image">
+              </div>
+              <div class="col-md-8">
+                <div class="card-body">
+                  <h5 class="card-title">{{beer?.manufacturer?.name}}</h5>
+                  <p *ngIf="beer?.manufacturer?.description" class="card-text">{{beer?.manufacturer?.description}}</p>
+                  <p *ngIf="!beer?.manufacturer?.description">No description provided.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="accordion-item">
+      <h2 class="accordion-header">
+        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#country"
+          aria-expanded="false" aria-controls="country">
+          <h5>Country: {{beer?.originCountry?.name}}</h5>
+        </button>
+      </h2>
+      <div id="country" class="accordion-collapse collapse" aria-labelledby="beer-origin-country">
+        <div class="accordion-body">
+          <span *ngIf="beer?.originCountry?.description">{{beer?.originCountry?.description}}</span>
+          <span *ngIf="!beer?.originCountry?.description">No description provided.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="mt-3">
+    <button type="button" class="btn btn-info" [routerLink]="['../', 'edit', beer?.id]">
+      Edit
+    </button>
+    <button type="button" id="deleteButton" class="btn btn-danger" data-bs-toggle="modal"
+      data-bs-target="#deleteModal">Delete</button>
+  </div>
+
+  <!-- Modal for deleting the beer -->
+  <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete
+            <em>{{beer?.name}}</em> from the app?
+          </h5>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-danger" data-bs-dismiss="modal" (click)="deleteBeer()">Delete</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

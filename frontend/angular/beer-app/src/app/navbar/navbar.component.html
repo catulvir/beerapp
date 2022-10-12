@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-sm navbar-light">
+
+  <div class="container-fluid">
+
+    <a class="navbar-brand" href="">
+      <img src="/assets/beer-outline.svg" alt="Beer brand image" width="30" class="img-fluid">
+      Beer App
+    </a>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+      aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+
+        <li class="nav-item active">
+          <a class="nav-link" routerLink="/beers">Beers</a>
+        </li>
+
+      </ul>
+    </div>
+
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNavDropdown">
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item dropdown">
+
+          <button class="btn btn-info dropdown-toggle" type="button" id="navbarDropdown" data-bs-toggle="dropdown"
+            aria-haspopup="true" aria-expanded="false">
+            Admin
+          </button>
+
+          <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+            <a class="dropdown-item" routerLink="/beer-types">Types</a>
+            <a class="dropdown-item" routerLink="/flavours">Flavours</a>
+            <a class="dropdown-item" routerLink="/manufacturers">Manufacturers</a>
+            <a class="dropdown-item" routerLink="/origin-countries">Countries</a>
+            <div class="dropdown-divider"></div>
+            <a class="dropdown-item disabled">Beer Flavours</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>

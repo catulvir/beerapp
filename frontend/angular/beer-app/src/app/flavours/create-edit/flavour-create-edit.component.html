@@ -1,0 +1,58 @@
+<div class="container">
+
+    <div *ngIf="loading" class="alert alert-warning text-center">
+        <div class="spinner-border text-warning" role="status"></div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+        {{successMessage}}
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <div *ngIf="!isAddMode && flavourName">
+            <h1 class="display-1 align-middle">{{flavourName}}</h1>
+        </div>
+        <div *ngIf="isAddMode">
+            <h1 class="display-1 align-middle">Flavour</h1>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+        <div class="table-responsive">
+            <table class="table table-borderless">
+                <tbody>
+                    <tr class="input-row">
+                        <td>
+                            <div class="input-group input-group-lg">
+                                <span class="input-group-text" id="inputGroup-sizing-lg1">Name</span>
+                                <input id="name" class="form-control" aria-label="Flavour name" type="text"
+                                    formControlName="name">
+                                <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+                                    <div *ngIf="name?.errors?.['required']">Flavour name is missing.</div>
+                                    <div *ngIf="name?.errors?.['minlength']">Name is too short (2 symbols min).</div>
+                                    <div *ngIf="name?.errors?.['maxlength']">Name is too long (63 symbols max).</div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr class="input-row">
+                        <td *ngIf="!isAddMode">
+                            <button type="submit" class="btn btn-success"
+                                [disabled]="disableMode || form.invalid">Edit</button>
+                        </td>
+                        <td *ngIf="isAddMode">
+                            <button type="submit" class="btn btn-success"
+                                [disabled]="disableMode || form.invalid">Add</button>
+                        </td>
+                    </tr>
+                </tfoot>
+            </table>
+        </div>
+    </form>
+</div>

@@ -1,0 +1,75 @@
+<div class="container-xxl">
+
+  <div *ngIf="loading" class="alert alert-warning text-center">
+    <div class="spinner-border text-warning" role="status"></div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{successMessage}}
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <h1 class="display-1 align-middle">All manufacturers</h1>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary btn-lg btn-block" routerLink="create">
+      <h3 class="display-4">Add new</h3>
+    </button>
+  </div>
+
+  <br>
+
+  <div class="d-flex justify-content-center">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="manufacturerName"
+        (keyup.enter)="getManufacturers()">
+      <button type="button" class="btn btn-primary" (click)="getManufacturers()">Search</button>
+    </div>
+  </div>
+
+  <div class="row row-cols-1 row-cols-sm-3 g-4">
+    <div *ngFor="let manufacturer of manufacturers">
+      <div class="card text-center">
+        <img [src]="manufacturer.imageLink" class="card-img-top img-thumbnail" alt="manufacturer image">
+        <div class="card-body">
+          <h5 class="card-title">{{manufacturer.name}}</h5>
+          <div *ngIf="!manufacturer.description">
+            <p class="card-text">No description provided.</p>
+          </div>
+          <div *ngIf="manufacturer.description">
+            <p class="card-text">{{manufacturer.description}}</p>
+          </div>
+        </div>
+        <div class="card-footer">
+          <button type="button" id="editButton" class="btn btn-primary me-1"
+            [routerLink]="['edit', manufacturer.id]">Edit</button>
+          <button type="button" id="deleteButton" class="btn btn-danger" (click)="openModal(manufacturer)"
+            data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+        </div>
+      </div>
+
+      <!-- Modal for deleting the manufacturer -->
+      <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete
+                <em>{{manufacturerToBeDeleted?.name}}</em> from the database?
+              </h5>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+              <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                (click)="deleteManufacturer(manufacturerToBeDeleted?.id)">Delete</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

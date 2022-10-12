@@ -1,0 +1,77 @@
+<div class="container-xxl">
+
+  <div *ngIf="loading" class="alert alert-warning text-center">
+    <div class="spinner-border text-warning" role="status"></div>
+  </div>
+
+  <div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+  </div>
+
+  <div *ngIf="successMessage" class="alert alert-success">
+    {{successMessage}}
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <h1 class="display-1 align-middle">All countries</h1>
+  </div>
+
+  <div class="d-flex justify-content-center">
+    <button type="button" class="btn btn-primary btn-lg btn-block" routerLink="create">
+      <h3 class="display-4">Add new</h3>
+    </button>
+  </div>
+
+  <br>
+
+  <div class="d-flex justify-content-center">
+    <div class="input-group mb-3">
+      <input type="text" class="form-control" placeholder="Search by name" [(ngModel)]="countryName"
+        (keyup.enter)="getCountries()">
+      <button type="button" class="btn btn-primary" (click)="getCountries()">Search</button>
+    </div>
+  </div>
+
+  <div class="table-responsive">
+    <table class="table table-hover table-striped align-middle">
+      <caption class="text-center">Beer origin countries</caption>
+      <thead class="table-primary">
+        <tr>
+          <th>Name</th>
+          <th>Description</th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let country of countries">
+          <td>{{country.name}}</td>
+          <td *ngIf="!country.description">No description provided.</td>
+          <td *ngIf="country.description">{{country.description}}</td>
+          <td class="text-end w-10"><button type="button" class="btn btn-primary me-1"
+              [routerLink]="['edit', country.id]">Edit</button>
+            <button type="button" class="btn btn-danger" (click)="openModal(country)" data-bs-toggle="modal"
+              data-bs-target="#deleteModal">Delete</button>
+          </td>
+
+          <!-- Modal for deleting the country -->
+          <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel" aria-hidden="true">
+            <div class="modal-dialog">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete the country of
+                    <em>{{countryToBeDeleted?.name}}</em> from the app?
+                  </h5>
+                </div>
+                <div class="modal-footer">
+                  <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                  <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                    (click)="deleteCountry(countryToBeDeleted?.id)">Delete</button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

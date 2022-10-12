@@ -1,0 +1,89 @@
+<div class="container-xxl">
+
+    <div *ngIf="loading" class="alert alert-warning text-center">
+        <div class="spinner-border text-warning" role="status"></div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+        {{successMessage}}
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <h1 class="display-1 align-middle">All beers</h1>
+    </div>
+
+    <div class="d-flex justify-content-center">
+        <button type="button" class="btn btn-info btn-lg btn-block" routerLink="create">
+            <h3 class="display-4">Add new</h3>
+        </button>
+    </div>
+
+    <br>
+
+    <div class="d-flex justify-content-center">
+        <div class="input-group mb-3">
+            <input type="text" class="form-control" placeholder="Search by name" (keyup.enter)="getBeers()"
+                [(ngModel)]="beerName">
+            <button type="submit" class="btn btn-primary" (click)="getBeers()">Search</button>
+        </div>
+    </div>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
+        <div *ngFor="let beer of beers">
+            <div class="card text-center">
+                <img [src]="beer.imageLink" class="card-img-top" id="beerImage" alt="beer image">
+                <div class="card-body">
+                    <h5 class="card-title">{{beer.name}} {{beer.abv}}%</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">
+                        <span class="me-1">{{beer?.manufacturer?.name}},</span>
+                        <span class="me-1" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            [title]="beer.beerType?.description">{{beer.beerType?.name}},</span>
+                        <span class="me-1" data-bs-toggle="tooltip" data-bs-placement="bottom"
+                            [title]="beer.originCountry?.description">{{beer.originCountry?.name}}</span>
+                    </h6>
+                </div>
+                <ul class="list-group list-group-flush">
+                    <li class="list-group-item" id="flavoursList">
+                        <div *ngIf="beer.isCraft">
+                            <span class="badge rounded-pill bg-success text-dark me-1">craft</span>
+                        </div>
+                        <div *ngFor="let flavour of beer.flavours">
+                            <span class="badge rounded-pill bg-warning text-dark me-1">{{flavour.name}}</span>
+                        </div>
+                    </li>
+                </ul>
+                <div class="card-footer">
+                    <button type="button" id="editButton" class="btn btn-info"
+                        [routerLink]="['edit', beer.id]">Edit</button>
+                    <button type="button" id="detailsButton" class="btn btn-primary"
+                        [routerLink]="[beer.id]">Details</button>
+                    <button type="button" id="deleteButton" class="btn btn-danger" (click)="openModal(beer)"
+                        data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
+                </div>
+            </div>
+
+            <!-- Modal for deleting the beer -->
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="deleteModalLabel"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="deleteModalLabel">Are you sure you want to delete
+                                <em>{{beerToBeDeleted?.name}}</em> from the app?
+                            </h5>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-danger" data-bs-dismiss="modal"
+                                (click)="deleteBeer(beerToBeDeleted?.id)">Delete</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

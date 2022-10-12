@@ -1,0 +1,171 @@
+<div class="container">
+
+    <div *ngIf="loading" class="alert alert-warning text-center">
+        <div class="spinner-border text-warning" role="status"></div>
+    </div>
+
+    <div *ngIf="errorMessage" class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+
+    <div *ngIf="successMessage" class="alert alert-success">
+        {{successMessage}}
+    </div>
+
+    <div class="d-flex justify-content-center mb-3">
+        <div *ngIf="!isAddMode && beer?.name">
+            <h1 class="display-1 align-middle">{{beer?.name}}</h1>
+        </div>
+        <div *ngIf="isAddMode">
+            <h1 class="display-1 align-middle">Beer</h1>
+        </div>
+    </div>
+
+    <form [formGroup]="form" (ngSubmit)="onSubmit()">
+
+        <div class="mb-3">
+            <label class="form-label" for="name">Name</label>
+            <input id="name" class="form-control" aria-label="Beer name" type="text" formControlName="name"
+                placeholder="Corona Extra">
+            <div *ngIf="name?.invalid && (name?.dirty || name?.touched)" class="alert alert-danger">
+                <div *ngIf="name?.errors?.['required']">Please provide the beer name.</div>
+                <div *ngIf="name?.errors?.['maxlength']">Name is too long (63 symbols max).</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <label class="form-label" for="description">Description</label>
+            <textarea id="description" class="form-control" aria-label="Beer description" type="text"
+                formControlName="description"></textarea>
+            <div *ngIf="description?.invalid && (description?.dirty || description?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="description?.errors?.['maxlength']">Description is too long (511 symbols
+                    max).</div>
+            </div>
+        </div>
+
+        <div class="mb-3">
+            <select-beer-type [form]="form"></select-beer-type>
+        </div>
+
+        <div class="mb-3">
+            <select-manufacturer [form]="form"></select-manufacturer>
+        </div>
+
+        <div class="mb-3">
+            <select-origin-country [form]="form"></select-origin-country>
+        </div>
+
+        <div class="mb-3">
+            <multi-select-flavours [form]="form"></multi-select-flavours>
+        </div>
+
+        <label class="form-label" for="abv">ABV</label>
+        <div class="input-group mb-3">
+            <input type="number" id="abv" class="form-control" step="0.1" min="0.0" max="99.9" aria-label="Beer abv"
+                formControlName="abv">
+            <span class="input-group-text" id="basic-addon3">%</span>
+            <div *ngIf="abv?.invalid && (abv?.dirty || abv?.touched)" class="alert alert-danger">
+                <div *ngIf="abv?.errors?.['required']">Please type in beer's ABV.</div>
+                <div *ngIf="abv?.errors?.['min']">Beer's ABV can't be lower than 0%.</div>
+                <div *ngIf="abv?.errors?.['max']">Any beverage's ABV can't be higher than 99.9%.</div>
+            </div>
+        </div>
+
+        <label class="form-label" for="averageRating">Admin rating (temp)</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="number" id="averageRating" min="0" max="10" aria-label="Beer avg rating"
+                formControlName="averageRating">
+            <span class="input-group-text" id="basic-addon3">⭐</span>
+            <div *ngIf="averageRating?.invalid && (averageRating?.dirty || averageRating?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="averageRating?.errors?.['min']">Admin rating can't be lower than 0 stars.</div>
+                <div *ngIf="averageRating?.errors?.['max']">Admin rating can't be higher than 10 stars.</div>
+            </div>
+        </div>
+
+        <label class="form-label" for="bitterness">Bitterness</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="number" id="bitterness" step="0.1" min="0.0" max="1000"
+                aria-label="Beer bitterness" formControlName="bitterness">
+            <span class="input-group-text" id="basic-addon3">IBU</span>
+            <div *ngIf="bitterness?.invalid && (bitterness?.dirty || bitterness?.touched)" class="alert alert-danger">
+                <div *ngIf="bitterness?.errors?.['min']">Beer's IBU can't be lower than 0.0.</div>
+                <div *ngIf="bitterness?.errors?.['max']">Beer's IBU can't be higher than 1000.</div>
+            </div>
+        </div>
+
+        <label class="form-label" for="colour">Colour</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="number" id="colour" step="0.1" min="0.0" max="5000"
+                aria-label="Beer colour" formControlName="colour">
+            <span class="input-group-text" id="basic-addon3">EBC</span>
+            <div *ngIf="colour?.invalid && (colour?.dirty || colour?.touched)" class="alert alert-danger">
+                <div *ngIf="colour?.errors?.['min']">Beer's EBC can't be lower than 0.0.</div>
+                <div *ngIf="colour?.errors?.['max']">Beer's EBC can't be higher than 5000.</div>
+            </div>
+        </div>
+
+        <label class="form-label" for="wortDensity">Wort density</label>
+        <div class="input-group mb-3">
+            <input class="form-control" type="number" id="wortDensity" step="0.1" min="0.0" max="99.9"
+                aria-label="Beer wort density" formControlName="wortDensity">
+            <span class="input-group-text" id="basic-addon3">% P</span>
+            <div *ngIf="wortDensity?.invalid && (wortDensity?.dirty || wortDensity?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="wortDensity?.errors?.['min']">Beer's wort density can't be lower than 0.0 % P.</div>
+                <div *ngIf="wortDensity?.errors?.['max']">Beer's wort density can't be higher than 99.9 % P.</div>
+            </div>
+        </div>
+
+        <label class="form-label" for="lowerServeTemperature">Serve temperature</label>
+        <div class="input-group mb-3">
+            <span class="input-group-text" id="basic-addon3">From</span>
+            <input class="form-control" type="number" id="lowerServeTemperature" min="0" max="100"
+                aria-label="Beer lower serve temperature" formControlName="lowerServeTemperature">
+            <span class="input-group-text" id="basic-addon3">To</span>
+            <input class="form-control" type="number" id="higherServeTemperature" min="0" max="100"
+                aria-label="Beer higher serve temperature" formControlName="higherServeTemperature">
+            <span class="input-group-text" id="basic-addon3">°C</span>
+
+            <div *ngIf="lowerServeTemperature?.invalid && (lowerServeTemperature?.dirty || lowerServeTemperature?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="lowerServeTemperature?.errors?.['min']">Beer's lower serve temperature can't be lower than
+                    0.0 °C.</div>
+                <div *ngIf="lowerServeTemperature?.errors?.['max']">Beer's lower serve temperature can't be higher than
+                    100 °C.</div>
+            </div>
+            <div *ngIf="higherServeTemperature?.invalid && (higherServeTemperature?.dirty || higherServeTemperature?.touched)"
+                class="alert alert-danger">
+                <div *ngIf="higherServeTemperature?.errors?.['min']">Beer's higher serve temperature can't be lower than
+                    0.0 °C.</div>
+                <div *ngIf="higherServeTemperature?.errors?.['max']">Beer's higher serve temperature can't be higher
+                    than 100 °C.</div>
+            </div>
+        </div>
+        <div *ngIf="form?.errors?.['lowTempIsHigher'] && (form.touched || form.dirty)" class="alert alert-danger mb-3">
+            Beer's lower serve temperature can't be
+            higher than beer's higher serve temperature.</div>
+
+        <div class="mb-3">
+            <label class="form-label" for="image">Image (test)</label>
+            <input id="image" class="form-control" aria-label="Beer image" type="text" formControlName="imageLink"
+                placeholder="web-link to ...png/jpg/jpeg">
+            <div *ngIf="imageLink?.invalid && (imageLink?.dirty || imageLink?.touched)" class="alert alert-danger">
+                <div *ngIf="imageLink?.errors?.['required']">Please provide image for the beer.</div>
+                <div *ngIf="imageLink?.errors?.['maxlength']">Please shorten the link.</div>
+            </div>
+        </div>
+
+        <div class="form-check form-switch mb-3">
+            <label class="form-check-label" for="isCraft">Is it craft?</label>
+            <input class="form-check-input" aria-label="Checkbox if beer is craft" formControlName="isCraft"
+                type="checkbox" id="isCraft">
+        </div>
+
+        <button *ngIf="!isAddMode" type="submit" class="btn btn-success"
+            [disabled]="disableMode || form.invalid">Edit</button>
+        <button *ngIf="isAddMode" type="submit" class="btn btn-success"
+            [disabled]="disableMode || form.invalid">Add</button>
+    </form>
+</div>

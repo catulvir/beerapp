@@ -1,0 +1,22 @@
+.card {
+    height: 100%
+}
+
+#editButton {
+    float: left;
+}
+
+#deleteButton {
+    float: right;
+}
+
+#flavoursList {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+#beerImage {
+    max-width: 450px;
+    max-height: 440px
+}

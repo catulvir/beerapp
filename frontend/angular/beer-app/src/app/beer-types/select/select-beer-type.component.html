@@ -1,0 +1,25 @@
+<div *ngIf="loading" class="alert alert-warning text-center">
+    <div class="spinner-border text-warning" role="status"></div>
+</div>
+
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+
+<div *ngIf="loading" class="alert alert-warning text-center">
+    <div class="spinner-border text-warning" role="status"></div>
+</div>
+
+<div [formGroup]="form">
+    <label class="form-label" for="selectType">Type</label>
+    <select class="form-select" [formControlName]="'beerType'" id="selectType" [compareWith]="compareFn" id="selectType"
+        aria-label="Select beer type">
+        <option *ngFor="let type of beerTypes" [ngValue]="type">
+            {{ type.name }}
+        </option>
+    </select>
+
+    <div *ngIf="beerType?.invalid && (beerType?.dirty || beerType?.touched)" class="alert alert-danger">
+        <div *ngIf="beerType?.errors?.['required']">Please choose a beer type.</div>
+    </div>
+</div>

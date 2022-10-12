@@ -1,0 +1,22 @@
+<div *ngIf="errorMessage" class="alert alert-danger">
+    {{errorMessage}}
+</div>
+
+<div *ngIf="loading" class="alert alert-warning text-center">
+    <div class="spinner-border text-warning" role="status"></div>
+</div>
+
+<div [formGroup]="form">
+    <label class="form-label" for="selectCountry">Country</label>
+    <select class="form-select" [formControlName]="'originCountry'" id="selectCountry" [compareWith]="compareFn"
+        id="selectCountry" aria-label="Select country">
+        <option *ngFor="let country of countries" [ngValue]="country">
+            {{ country.name }}
+        </option>
+    </select>
+
+    <div *ngIf="originCountry?.invalid && (originCountry?.dirty || originCountry?.touched) && originCountry?.errors?.['required']"
+        class="alert alert-danger">
+        Please choose a country of origin.
+    </div>
+</div>

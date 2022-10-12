@@ -20,11 +20,14 @@ repositories {
 
 dependencies {
 	implementation 'javax.validation:validation-api:2.0.1.Final'
-	implementation 'javax.persistence:javax.persistence-api:2.2'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
+	implementation 'org.springframework.boot:spring-boot-starter-jdbc:2.7.2'
+	implementation 'com.h2database:h2:2.1.214'
+	implementation 'org.liquibase:liquibase-core:4.15.0'
+	implementation 'org.liquibase:liquibase-gradle-plugin:2.1.1'
 	compileOnly 'org.projectlombok:lombok'
 	annotationProcessor 'org.projectlombok:lombok'
-	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+	implementation 'org.springframework.boot:spring-boot-starter-test'
 }
 
 tasks.named('test') {

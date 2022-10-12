@@ -1,0 +1,153 @@
+--liquibase formatted sql
+
+--changeset rozbergs@gmail.com:2 runAlways:true
+INSERT INTO flavours (name) VALUES ('hoppy');
+INSERT INTO flavours (name) VALUES ('floral');
+INSERT INTO flavours (name) VALUES ('fruity');
+INSERT INTO flavours (name) VALUES ('alcoholic');
+INSERT INTO flavours (name) VALUES ('warming');
+INSERT INTO flavours (name) VALUES ('sweet');
+INSERT INTO flavours (name) VALUES ('aromatic');
+INSERT INTO flavours (name) VALUES ('fragrant');
+INSERT INTO flavours (name) VALUES ('burnt');
+INSERT INTO flavours (name) VALUES ('caramel');
+INSERT INTO flavours (name) VALUES ('nutty');
+INSERT INTO flavours (name) VALUES ('grassy');
+INSERT INTO flavours (name) VALUES ('grainy');
+INSERT INTO flavours (name) VALUES ('worty');
+INSERT INTO flavours (name) VALUES ('malty');
+INSERT INTO flavours (name) VALUES ('banana');
+INSERT INTO flavours (name) VALUES ('woody');
+INSERT INTO flavours (name) VALUES ('strawberry');
+INSERT INTO flavours (name) VALUES ('raspberry');
+INSERT INTO flavours (name) VALUES ('pear');
+INSERT INTO flavours (name) VALUES ('melony');
+INSERT INTO flavours (name) VALUES ('black currant');
+INSERT INTO flavours (name) VALUES ('apple');
+INSERT INTO flavours (name) VALUES ('citrus');
+INSERT INTO flavours (name) VALUES ('spicy');
+INSERT INTO flavours (name) VALUES ('thick');
+INSERT INTO flavours (name) VALUES ('liquorice');
+INSERT INTO flavours (name) VALUES ('bready');
+INSERT INTO flavours (name) VALUES ('smoky');
+INSERT INTO flavours (name) VALUES ('cheesy');
+INSERT INTO flavours (name) VALUES ('rancid');
+INSERT INTO flavours (name) VALUES ('characterless');
+INSERT INTO flavours (name) VALUES ('watery');
+INSERT INTO flavours (name) VALUES ('piquant');
+INSERT INTO flavours (name) VALUES ('flat');
+INSERT INTO flavours (name) VALUES ('powdery');
+INSERT INTO flavours (name) VALUES ('drying');
+INSERT INTO flavours (name) VALUES ('metallic');
+INSERT INTO flavours (name) VALUES ('mouthcoating');
+INSERT INTO flavours (name) VALUES ('bitter');
+INSERT INTO flavours (name) VALUES ('salty');
+INSERT INTO flavours (name) VALUES ('oversweet');
+INSERT INTO flavours (name) VALUES ('syrupy');
+INSERT INTO flavours (name) VALUES ('vanilla');
+INSERT INTO flavours (name) VALUES ('honey');
+INSERT INTO flavours (name) VALUES ('sour');
+INSERT INTO flavours (name) VALUES ('earthy');
+INSERT INTO flavours (name) VALUES ('leathery');
+INSERT INTO flavours (name) VALUES ('yeasty');
+INSERT INTO flavours (name) VALUES ('meaty');
+INSERT INTO flavours (name) VALUES ('clean');
+INSERT INTO flavours (name) VALUES ('fresh');
+INSERT INTO flavours (name) VALUES ('refreshing');
+INSERT INTO flavours (name) VALUES ('coriander');
+INSERT INTO flavours (name) VALUES ('orange');
+INSERT INTO flavours (name) VALUES ('light');
+INSERT INTO flavours (name) VALUES ('dark');
+INSERT INTO flavours (name) VALUES ('crisp');
+INSERT INTO flavours (name) VALUES ('cloves');
+INSERT INTO flavours (name) VALUES ('flowery');
+
+INSERT INTO manufacturers (name, description, image_link) VALUES ('Saku', 'Saku Õlletehas was established in 1820, when the owner of Saku manor, Karl Friedrich Rehbinder decided to set up a small brewery at his manor. Documentation has proven that the first brewing period at the Saku beer house took place in October 1820. By 1899, Saku Õlletehas had become the biggest brewery in North Estonia and had built its own railway line between Saku and Tallinn.', 'https://www.saku.ee/media/40399/saku_logo_esinduslik.jpg');
+INSERT INTO manufacturers (name, description, image_link) VALUES ('A.LeCoq', 'A. Le Coq is the oldest and biggest drinks manufacturer in Estonia. A. Le Coq holds the leading position on the Estonian drinks market in the categories of beer, juice, and long drinks and ranks a strong second in the production of water, soft drinks and cider.', 'https://upload.wikimedia.org/wikipedia/en/thumb/5/57/A._Le_Coq_logo.svg/640px-A._Le_Coq_logo.svg.png');
+INSERT INTO manufacturers (name, description, image_link) VALUES ('Põhjala', 'We are Põhjala Brewery. Our beers are inspired by our heritage, local nature and cuisine. We take well‑known beer styles and add our own distinctive twist with surprising ingredients or long barrel aging.', 'https://assets.untappd.com/venuelogos/venue_8349816_39806a4b_bg_176.png?v=1');
+INSERT INTO manufacturers (name, description, image_link) VALUES ('Labietis', 'Latvian microbrewery.', 'https://assets.untappd.com/site/brewery_logos_hd/brewery-76935_d033a_hd.jpeg');
+INSERT INTO manufacturers (name, description, image_link) VALUES ('Krušovice', 'A typical Czech lager produced by Kralovsky Pivovar Krušovice, internationally known as The Royal Brewery of Krušovice and among the oldest in the Czech Republic. The aroma is dominated by hops, and the beer has a good head. The colour is gold and the taste quite bitter.', 'https://alcowiki.org/wp-content/uploads/2019/07/krusovice_logo-850x639.jpg');
+INSERT INTO manufacturers (name, description, image_link) VALUES ('Leffe', 'The canons started to brew beer at Leffe in 1240. During the brewing process, the boiling temperature killed the microbes, which made beer safe to drink. The quality of water has improved greatly over the centuries, but the brewing of beer has remained a tradition, also for the Norbertines in Leffe.', 'https://upload.wikimedia.org/wikipedia/commons/6/64/Leffe_Logo.png');
+INSERT INTO manufacturers (name, description, image_link) VALUES ('Staropramen', 'Czech beer from the heart of Prague.', 'https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Staropramen_logo.svg/1200px-Staropramen_logo.svg.png');
+INSERT INTO manufacturers (name, description, image_link) VALUES ('Lapin Kulta', 'The brewery was founded in 1873 under the name Torneå Bryggeri Aktiebolag. The brand is now owned by Hartwall, which is in turn owned by Royal Unibrew.', 'https://assets.untappd.com/site/beer_logos_hd/beer-36800_d3818_hd.jpeg');
+
+INSERT INTO origin_countries (name) VALUES ('Estonia');
+INSERT INTO origin_countries (name) VALUES ('Latvia');
+INSERT INTO origin_countries (name) VALUES ('Lithuania');
+INSERT INTO origin_countries (name) VALUES ('Denmark');
+INSERT INTO origin_countries (name) VALUES ('Mexico');
+INSERT INTO origin_countries (name) VALUES ('Finland');
+INSERT INTO origin_countries (name) VALUES ('Czechia');
+INSERT INTO origin_countries (name) VALUES ('Belgium');
+INSERT INTO origin_countries (name) VALUES ('Germany');
+INSERT INTO origin_countries (name) VALUES ('United Kingdom');
+INSERT INTO origin_countries (name) VALUES ('Ireland');
+INSERT INTO origin_countries (name) VALUES ('Spain');
+INSERT INTO origin_countries (name) VALUES ('Italy');
+INSERT INTO origin_countries (name) VALUES ('France');
+INSERT INTO origin_countries (name) VALUES ('The Netherlands');
+INSERT INTO origin_countries (name) VALUES ('Russia');
+INSERT INTO origin_countries (name) VALUES ('Poland');
+INSERT INTO origin_countries (name) VALUES ('Japan');
+INSERT INTO origin_countries (name) VALUES ('USA');
+
+INSERT INTO beer_types (name, description) VALUES ('Pilsner', 'A type of pale lager. It takes its name from the Bohemian city of Plzeň, where the first ever pale lager was produced in 1842 by Pilsner Urquell Brewery.');
+INSERT INTO beer_types (name, description) VALUES ('Pale Lager', 'Pale lager is a very pale to golden-colored beer with a well attenuated body and noble hop bitterness.');
+INSERT INTO beer_types (name, description) VALUES ('Amber Lager', 'Sometimes called Vienna lagers after the name of the city in which the style originated, are lagers with a color that ranges from amber to copper, which is achieved by the use of caramel or black patent malts.');
+INSERT INTO beer_types (name) VALUES ('Dark Lager');
+INSERT INTO beer_types (name) VALUES ('Belgian Ale');
+INSERT INTO beer_types (name) VALUES ('Cream Ale');
+INSERT INTO beer_types (name) VALUES ('Amber Ale');
+INSERT INTO beer_types (name) VALUES ('Dark Ale');
+INSERT INTO beer_types (name) VALUES ('Brown Ale');
+INSERT INTO beer_types (name) VALUES ('Red Ale');
+INSERT INTO beer_types (name) VALUES ('India Pale Ale');
+INSERT INTO beer_types (name) VALUES ('American Pale Ale');
+INSERT INTO beer_types (name) VALUES ('Wheat beer');
+INSERT INTO beer_types (name) VALUES ('Gose');
+INSERT INTO beer_types (name) VALUES ('Radler');
+INSERT INTO beer_types (name) VALUES ('Honey beer');
+INSERT INTO beer_types (name) VALUES ('Fruit beer');
+
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, lower_serve_temperature, higher_serve_temperature, image_link) VALUES (1, 1, 1, 'Saku Hele', false, 5.2, 6, 8, 'https://www.selver.ee/img/450/440/resize/4/7/4740019015775.jpg');
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, bitterness, colour, wort_density, image_link) VALUES (2, 1, 2, 'Alexander Bohemian', false, 5.0, 27, 16, 12.1, 'https://www.selver.ee/img/450/440/resize/4/7/4740098097204.jpg');
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, lower_serve_temperature, higher_serve_temperature, image_link) VALUES (1, 4, 1, 'Carlsberg', false, 5.0, 6, 8, 'https://www.selver.ee/img/450/440/resize/4/7/4770075447821.jpg');
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, bitterness, wort_density, image_link) VALUES (2, 5, 2, 'Corona Extra', false, 4.5, 18, 11.3, 'https://www.selver.ee/img/450/440/resize/7/5/75013769.jpg');
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, lower_serve_temperature, higher_serve_temperature, image_link) VALUES (5, 8, 6, 'Leffe Blonde', false, 6.6, 5, 5, 'https://www.selver.ee/img/450/440/resize/5/4/5410228142089.jpg');
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, bitterness, colour, image_link) VALUES (2, 7, 7, 'Staropramen Premium', false, 5.0, 27, 12, 'https://www.selver.ee/img/450/440/resize/4/7/4740168001322.jpg');
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, bitterness, colour, wort_density, image_link) VALUES (2, 7, 5, 'Krušovice Imperial Lager', false, 5.0, 29, 12, 11.7, 'https://www.selver.ee/img/450/440/resize/8/5/8594009922422.jpg');
+INSERT INTO beers (beer_type_id, origin_country_id, manufacturer_id, name, is_craft, abv, bitterness, lower_serve_temperature, higher_serve_temperature, image_link) VALUES (14, 1, 3, 'Põhjala Orange Gose', true, 5.5, 10, 6, 10, 'https://www.selver.ee/img/450/440/resize/4/7/4742976013610.jpg');
+
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (1, 1);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (1, 56);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (2, 1);
+
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (3, 53);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (3, 58);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (3, 1);
+
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (4, 56);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (4, 58);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (4, 52);
+
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (5, 2);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (5, 25);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (5, 44);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (5, 15);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (5, 59);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (5, 40);
+
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (6, 15);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (6, 40);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (6, 1);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (6, 60);
+
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (7, 40);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (7, 1);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (7, 15);
+
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (8, 24);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (8, 46);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (8, 41);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (8, 54);
+INSERT INTO beer_flavours (beer_id, flavour_id) VALUES (8, 55);

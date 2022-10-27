@@ -1,5 +1,5 @@
-import { NgModule } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
+import { Injectable, NgModule } from '@angular/core';
+import { ActivatedRouteSnapshot, Resolve, RouterModule, Routes } from '@angular/router';
 import { BeerTypesComponent } from './beer-types/list/beer-types.component';
 import { BeerTypeCreateEditComponent } from './beer-types/create-edit/beer-type-create-edit.component';
 import { BeerCreateEditComponent } from './beers/create-edit/beer-create-edit.component';
@@ -14,31 +14,40 @@ import { OriginCountriesComponent } from './origin-countries/list/origin-countri
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { HomePageComponent } from './home-page/home-page.component';
 
+@Injectable({providedIn: 'root'})
+export class ResolvedChildATitle implements Resolve<string> {
+  resolve(route: ActivatedRouteSnapshot) {
+    return Promise.resolve(route.params['routePath'].toUpperCase().replaceAll('-', ' '));
+  }
+}
+
 const routes: Routes = [
-  {path: '', component: HomePageComponent},
+  {path: '', redirectTo: 'home', pathMatch: 'full'},
 
-  {path: 'beers', component: BeersComponent},
-  {path: 'beers/create', component: BeerCreateEditComponent},
-  {path: 'beers/edit/:id', component: BeerCreateEditComponent},
-  {path: 'beers/:id', component: BeerDeleteDetailsComponent},
+  {path: 'home', title: 'HOME', component: HomePageComponent},
 
-  {path: 'beer-types', component: BeerTypesComponent},
-  {path: 'beer-types/create', component: BeerTypeCreateEditComponent},
-  {path: 'beer-types/edit/:id', component: BeerTypeCreateEditComponent},
+  {path: 'beers', title: 'BEERS', component: BeersComponent},
+  {path: 'beers/create', title: 'ADD NEW BEER', component: BeerCreateEditComponent},
+  {path: 'beers/edit/:id', title: 'EDIT BEER', component: BeerCreateEditComponent},
+  {path: 'beers/:routePath', title: ResolvedChildATitle, component: BeerDeleteDetailsComponent},
 
-  {path: 'origin-countries', component: OriginCountriesComponent},
-  {path: 'origin-countries/create', component: OriginCountryCreateEditComponent},
-  {path: 'origin-countries/edit/:id', component: OriginCountryCreateEditComponent},
+  {path: 'beer-types', title: 'BEER TYPES', component: BeerTypesComponent},
+  {path: 'beer-types/create', title: 'ADD NEW BEER TYPE', component: BeerTypeCreateEditComponent},
+  {path: 'beer-types/edit/:id', title: 'EDIT BEER TYPE', component: BeerTypeCreateEditComponent},
 
-  {path: 'manufacturers', component: ManufacturersComponent},
-  {path: 'manufacturers/create', component: ManufacturerCreateEditComponent}, 
-  {path: 'manufacturers/edit/:id', component: ManufacturerCreateEditComponent},
+  {path: 'origin-countries', title: 'COUNTRIES', component: OriginCountriesComponent},
+  {path: 'origin-countries/create', title: 'ADD NEW COUNTRY', component: OriginCountryCreateEditComponent},
+  {path: 'origin-countries/edit/:id', title: 'EDIT COUNTRY', component: OriginCountryCreateEditComponent},
 
-  {path: 'flavours', component: FlavoursComponent},
-  {path: 'flavours/create', component: FlavourCreateEditComponent},
-  {path: 'flavours/edit/:id', component: FlavourCreateEditComponent},
+  {path: 'manufacturers', title: 'MANUFACTURERS', component: ManufacturersComponent},
+  {path: 'manufacturers/create', title: 'ADD NEW MANUFACTURER', component: ManufacturerCreateEditComponent}, 
+  {path: 'manufacturers/edit/:id', title: 'EDIT MANUFACTURER', component: ManufacturerCreateEditComponent},
 
-  {path: '**', component: PageNotFoundComponent}
+  {path: 'flavours', title: 'FLAVOURS', component: FlavoursComponent},
+  {path: 'flavours/create', title: 'ADD NEW FLAVOUR', component: FlavourCreateEditComponent},
+  {path: 'flavours/edit/:id', title: 'EDIT FLAVOUR', component: FlavourCreateEditComponent},
+
+  {path: '**', title: 'PAGE NOT FOUND', component: PageNotFoundComponent}
 ];
 
 @NgModule({

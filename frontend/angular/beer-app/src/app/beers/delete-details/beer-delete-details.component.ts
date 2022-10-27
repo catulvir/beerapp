@@ -15,10 +15,14 @@ export class BeerDeleteDetailsComponent implements OnInit {
   errorMessage?: string;
   loading = false;
 
-  constructor(private beerService: BeerService, private route: ActivatedRoute, private router: Router) { }
+  constructor(private beerService: BeerService, private route: ActivatedRoute, private router: Router) {
+    const state = this.router.getCurrentNavigation()?.extras.state;
+    if (state) {
+      this.id = Number(state['id']);
+    }
+  }
 
   ngOnInit(): void {
-    this.id = Number(this.route.snapshot.params['id']);
     this.loadBeer();
   }
 

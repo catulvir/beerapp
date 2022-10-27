@@ -20,6 +20,7 @@ public class BeerRowMapper implements RowMapper<Beer> {
         Beer beer = new Beer();
         beer.setId(rs.getLong("ID"));
         beer.setName(rs.getString("NAME"));
+        beer.setRoutePath(rs.getString("NAME").trim().toLowerCase().replaceAll("\s", "-"));
         beer.setDescription(rs.getString("DESCRIPTION"));
         beer.setImageLink(rs.getString("IMAGE_LINK"));
         beer.setIsCraft(rs.getBoolean("IS_CRAFT"));

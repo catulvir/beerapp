@@ -16,7 +16,6 @@ export class BeersComponent implements OnInit {
   errorMessage?: string;
   successMessage?: string;
   loading = false;
-  cn = 'gr';
 
   constructor(private beerService: BeerService, private activatedRoute: ActivatedRoute, private router: Router) { }
 
@@ -62,6 +61,10 @@ export class BeersComponent implements OnInit {
       this.errorMessage = 'There is an error on our end, page will be reloaded!';
       this.ngOnInit();
     }
+  }
+
+  redirectToDetails(beer: Beer): void {
+    this.router.navigate([beer.routePath], {relativeTo: this.activatedRoute, state: {id: beer.id}});
   }
 
   openModal(beer: Beer): void {

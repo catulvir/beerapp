@@ -11,6 +11,7 @@ export class Beer {
     manufacturer?: Manufacturer;
     flavours?: Flavour[];
     name?: string;
+    routePath?: string;
     description?: string;
     imageLink?: string;
 	isCraft?: boolean;

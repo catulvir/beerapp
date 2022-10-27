@@ -23,6 +23,8 @@ public class Beer {
 	@Size(max = 63)
 	private String name;
 
+	private String routePath;
+
 	@Size(max = 511)
 	private String description;
 	

@@ -60,7 +60,7 @@
                     <button type="button" id="editButton" class="btn btn-info"
                         [routerLink]="['edit', beer.id]">Edit</button>
                     <button type="button" id="detailsButton" class="btn btn-primary"
-                        [routerLink]="[beer.id]">Details</button>
+                        (click)="redirectToDetails(beer)">Details</button>
                     <button type="button" id="deleteButton" class="btn btn-danger" (click)="openModal(beer)"
                         data-bs-toggle="modal" data-bs-target="#deleteModal">Delete</button>
                 </div>

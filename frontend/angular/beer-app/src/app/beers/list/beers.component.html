@@ -24,15 +24,44 @@
 
     <br>
 
-    <div class="d-flex justify-content-center">
-        <div class="input-group mb-3">
-            <input type="text" class="form-control" placeholder="Search by name" (keyup.enter)="getBeers()"
-                [(ngModel)]="beerName">
-            <button type="submit" class="btn btn-primary" (click)="getBeers()">Search</button>
+    <form [formGroup]="form" (ngSubmit)="getBeers()">
+        <div class="d-flex justify-content-center">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" formControlName="name" placeholder="Search by name..">
+                <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="collapse"
+                    data-bs-target="#advancedSearchCollaplse" aria-expanded="false"
+                    aria-controls="advancedSearchCollaplse">
+                </button>
+                <button type="submit" class="btn btn-primary">Search</button>
+            </div>
         </div>
-    </div>
+        <div class="collapse mb-3" id="advancedSearchCollaplse">
+            <div class="card card-body">
+                <div class="mb-3">
+                    <select-beer-type [form]="form"></select-beer-type>
+                </div>
 
-    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4">
+                <div class="mb-3">
+                    <select-manufacturer [form]="form"></select-manufacturer>
+                </div>
+
+                <div class="mb-3">
+                    <select-origin-country [form]="form"></select-origin-country>
+                </div>
+
+                <!-- temporary solution - switch to radios or else -->
+                <div class="form-check form-switch mb-3">
+                    <label class="form-check-label" for="isCraft">Is it craft?</label>
+                    <input class="form-check-input" aria-label="Switch if beer is craft" formControlName="isCraft"
+                        type="checkbox" id="isCraft">
+                </div>
+
+                <button class="btn btn-secondary" (click)="form.reset()">Clear & Search</button>
+            </div>
+        </div>
+    </form>
+
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 row-cols-xl-4 g-3">
         <div *ngFor="let beer of beers">
             <div class="card text-center">
                 <img [src]="beer.imageLink" class="card-img-top" id="beerImage" alt="beer image">

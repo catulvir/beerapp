@@ -35,7 +35,7 @@
   <div class="row row-cols-1 row-cols-sm-3 g-4">
     <div *ngFor="let manufacturer of manufacturers">
       <div class="card text-center">
-        <img [src]="manufacturer.imageLink" class="card-img-top img-thumbnail" alt="manufacturer image">
+        <img [src]="manufacturer.imageLink" class="card-img-top" id="manufacturerImage" alt="manufacturer image">
         <div class="card-body">
           <h5 class="card-title">{{manufacturer.name}}</h5>
           <div *ngIf="!manufacturer.description">

@@ -48,9 +48,6 @@ export class BeerDeleteDetailsComponent implements OnInit {
     if (this.beer?.id !== undefined) {
       this.loading = true;
       this.beerService.deleteBeer(this.beer.id).subscribe({
-        next: () => {
-          this.ngOnInit();
-        },
         error: (err) => {
           this.errorMessage = err;
           this.loading = false;

@@ -148,7 +148,7 @@
             higher than beer's higher serve temperature.</div>
 
         <div class="mb-3">
-            <label class="form-label" for="image">Image (test)</label>
+            <label class="form-label" for="image">Image</label>
             <input id="image" class="form-control" aria-label="Beer image" type="text" formControlName="imageLink"
                 placeholder="web-link to ...png/jpg/jpeg">
             <div *ngIf="imageLink?.invalid && (imageLink?.dirty || imageLink?.touched)" class="alert alert-danger">
@@ -159,7 +159,7 @@
 
         <div class="form-check form-switch mb-3">
             <label class="form-check-label" for="isCraft">Is it craft?</label>
-            <input class="form-check-input" aria-label="Checkbox if beer is craft" formControlName="isCraft"
+            <input class="form-check-input" aria-label="Switch if beer is craft" formControlName="isCraft"
                 type="checkbox" id="isCraft">
         </div>
 

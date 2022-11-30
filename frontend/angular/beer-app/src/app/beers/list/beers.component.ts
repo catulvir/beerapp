@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Beer } from '../beer';
 import { BeerService } from '../beer-service';
 import { ActivatedRoute, Router } from '@angular/router';
+import { FormBuilder, FormGroup } from '@angular/forms';
 
 @Component({
   selector: 'app-beers',
@@ -10,22 +11,30 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class BeersComponent implements OnInit {
 
-  beerName?: string;
+  form!: FormGroup;
   beerToBeDeleted?: Beer;
   beers: Beer[] = [];
   errorMessage?: string;
   successMessage?: string;
   loading = false;
 
-  constructor(private beerService: BeerService, private activatedRoute: ActivatedRoute, private router: Router) { }
+  constructor(private beerService: BeerService, private fb: FormBuilder, private activatedRoute: ActivatedRoute, private router: Router) { }
 
   ngOnInit(): void {
     this.getBeers();
+
+    this.form = this.fb.group({
+      name: [null],
+      beerType: [null],
+      originCountry: [null],
+      manufacturer: [null],
+      isCraft: [null],
+    });
   }
 
   getBeers(): void {
     this.loading = true;
-    this.beerService.getBeers(this.beerName).subscribe({
+    this.beerService.getBeers(this.form?.value).subscribe({
       next: (beers) => {
         this.beers = beers;
       },
@@ -37,7 +46,6 @@ export class BeersComponent implements OnInit {
         this.loading = false;
       }
     });
-    this.loading = false;
   }
 
   deleteBeer(id?: number): void {
@@ -64,7 +72,7 @@ export class BeersComponent implements OnInit {
   }
 
   redirectToDetails(beer: Beer): void {
-    this.router.navigate([beer.routePath], {relativeTo: this.activatedRoute, state: {id: beer.id}});
+    this.router.navigate([beer.routePath], { relativeTo: this.activatedRoute, state: { id: beer.id } });
   }
 
   openModal(beer: Beer): void {

@@ -1,6 +1,8 @@
 package catulvir.beerapp.backend.controller;
 
 import java.util.List;
+import java.util.Map;
+
 import javax.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 import catulvir.beerapp.backend.model.Beer;
@@ -17,8 +19,8 @@ public class BeerController {
 
     @GetMapping("beers")
     @ResponseBody
-    public List<Beer> getBeers(@RequestParam(required = false) String name) {
-        return beerRepository.findBeers(name);
+    public List<Beer> getBeers(@RequestParam(required = false) Map<String,String> params) {
+        return beerRepository.findBeers(params);
     }
 
     @GetMapping("beers/{id}")

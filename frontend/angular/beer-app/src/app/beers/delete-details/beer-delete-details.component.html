@@ -26,7 +26,7 @@
           Properties
         </div>
         <ul class="list-group list-group-flush">
-          <li class="list-group-item">(Admin) rating: {{beer?.averageRating}}/10 ⭐</li>
+          <li class="list-group-item">Admin rating: {{beer?.averageRating}}/10 ⭐</li>
           <li class="list-group-item">ABV: {{beer?.abv}}%</li>
           <li *ngIf="beer?.bitterness !== 0" class="list-group-item">Bitterness: {{beer?.bitterness}} IBU</li>
           <li *ngIf="beer?.colour !== 0" class="list-group-item">Colour: {{beer?.colour}} EBC</li>
@@ -87,7 +87,7 @@
           <div class="card border-light mb-3 mt-3" style="max-width: 900px; border: none">
             <div class="row g-0">
               <div class="col-md-4">
-                <img [src]="beer?.manufacturer?.imageLink" class="card-img-top" alt="manufacturer image">
+                <img [src]="beer?.manufacturer?.imageLink" class="card-img-top" id="manufacturerImage" alt="manufacturer image">
               </div>
               <div class="col-md-8">
                 <div class="card-body">

@@ -1,6 +1,7 @@
 package catulvir.beerapp.backend.repository;
 
 import java.sql.PreparedStatement;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -20,7 +21,7 @@ public class BeerRepository {
         this.template = template;
     }
 
-    public List<Beer> findBeers(String name) {
+    public List<Beer> findBeers(Map<String, String> searchParams) {
 
         StringBuilder sql = new StringBuilder(
                 "SELECT b.ID, b.BEER_TYPE_ID, b.ORIGIN_COUNTRY_ID, b.MANUFACTURER_ID, b.NAME, b.DESCRIPTION, b.IMAGE_LINK, "
@@ -38,17 +39,45 @@ public class BeerRepository {
                         "LEFT JOIN BEER_TYPES bt ON b.beer_type_id = bt.id " +
                         "LEFT JOIN ORIGIN_COUNTRIES oc ON b.ORIGIN_COUNTRY_ID = oc.ID " +
                         "LEFT JOIN MANUFACTURERS m ON b.MANUFACTURER_ID = m.ID ");
-        // limit, order by, pagination, overall complexity causes concerns
+        // limit, pagination
+        // maybe namedParameterJdbcTemplate
 
-        if (name != null) {
-            sql.append("WHERE LOWER(b.name) LIKE ? GROUP BY b.id ORDER BY b.name");
-            String trimmedName = "%" + name.trim().toLowerCase() + "%";
-            return template.query(sql.toString(), new BeerRowMapper(), trimmedName);
+        List<Object> queryParameters = new ArrayList<>();
+        if (searchParams.size() > 0) {
+            sql.append("WHERE ");
+        }
+
+        // inject into queryParams breaks sql, but is it even possible?
+
+        for (Map.Entry<String, String> param : searchParams.entrySet()) {
+            if (!queryParameters.isEmpty()) {
+                sql.append("AND ");
+            }
+            if (param.getKey().equals("name")) {
+                sql.append("LOWER(b.name) LIKE ? ");
+                String trimmedName = "%" + param.getValue().trim().toLowerCase() + "%";
+                queryParameters.add(trimmedName);
+            }
+            if (param.getKey().equals("isCraft")) {
+                sql.append("b.IS_CRAFT = ? ");
+                queryParameters.add(Boolean.parseBoolean(searchParams.get("isCraft")));
+            }
+            if (param.getKey().equals("beerTypeName")) {
+                sql.append("bt.NAME = ? ");
+                queryParameters.add(param.getValue());
+            }
+            if (param.getKey().equals("originCountryName")) {
+                sql.append("oc.NAME = ? ");
+                queryParameters.add(param.getValue());
+            }
+            if (param.getKey().equals("manufacturerName")) {
+                sql.append("m.NAME = ? ");
+                queryParameters.add(param.getValue());
+            }
         }
 
         sql.append("GROUP BY b.id ORDER BY b.name");
-
-        return template.query(sql.toString(), new BeerRowMapper());
+        return template.query(sql.toString(), new BeerRowMapper(), queryParameters.toArray());
     }
 
     public Beer findBeer(Long id) {
@@ -131,7 +160,7 @@ public class BeerRepository {
                 beer.getAverageRating(), beer.getBitterness(), beer.getColour(), beer.getWortDensity(),
                 beer.getLowerServeTemperature(), beer.getHigherServeTemperature(), beer.getId());
 
-        // maybe compare flavours not to uselessly run batch and delete
+        // maybe compare flavours not to uselessly run batch and delete every time
 
         String deleteFlavoursSql = "DELETE FROM beer_flavours WHERE beer_id = ?";
 
